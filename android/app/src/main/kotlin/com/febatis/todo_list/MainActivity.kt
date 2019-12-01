@@ -1,4 +1,4 @@
-package com.example.febatis_todo_list
+package com.febatis.todo_list
 
 import android.os.Bundle
 import io.flutter.app.FlutterActivity
