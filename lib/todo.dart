@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TodoPage extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class TodoPage extends StatefulWidget {
 class _TodoPageState extends State<TodoPage> {
   //Controllers são usadas quando precisamos resgatar ou modificar uma propriedade de um widget
   final _textController = TextEditingController();
+
+  final databaseReference = Firestore.instance;
 
   //Lista responsável por popular nosso ListView
   List _toDoList = [];
@@ -50,8 +53,34 @@ class _TodoPageState extends State<TodoPage> {
     });
   }
 
+  void createRecord() async {
+    await databaseReference.collection("books")
+        .document("1")
+        .setData({
+      'title': 'Mastering Flutter',
+      'description': 'Programming Guide for Dart'
+    });
+
+    DocumentReference ref = await databaseReference.collection("books")
+        .add({
+      'title': 'Flutter in Action',
+      'description': 'Complete Programming Guide to learn Flutter'
+    });
+    print(ref.documentID);
+  }
+
+  void getData() {
+    databaseReference
+        .collection("baby")
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((f) => print('${f.data}}'));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    getData();
     return Scaffold(
         appBar: AppBar(
           title: Text('ToDo Flutter'),
@@ -74,7 +103,10 @@ class _TodoPageState extends State<TodoPage> {
                       color: Colors.indigo,
                       child: Text('Adicionar'),
                       textColor: Colors.white,
-                      onPressed: addToDo,
+                      onPressed: () {
+                        addToDo();
+                        createRecord();
+                        },
                     ),
                   ],
                 )),
