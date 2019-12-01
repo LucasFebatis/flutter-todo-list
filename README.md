@@ -2,6 +2,16 @@
 
 A new Flutter project.
 
+## Public Utility
+
+Flutter Official Building a web application with Flutter Tutorial
+
+https://flutter.dev/docs/get-started/web
+
+TodoList Exemple (pt-BR)
+
+https://medium.com/tableless/construindo-aplica%C3%A7%C3%A3o-web-com-flutter-e9b72e551d12
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
